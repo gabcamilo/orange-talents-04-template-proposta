@@ -1,0 +1,29 @@
+package br.com.zupacademy.gabriela.proposal.proposal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
+
+@RequestMapping("/proposals")
+@RestController
+public class ProposalWriteController {
+
+    private ProposalRepository proposalRepository;
+
+    @Autowired
+    public ProposalWriteController(ProposalRepository proposalRepository) {
+        this.proposalRepository = proposalRepository;
+    }
+
+    @PostMapping
+    public ResponseEntity<CreateProposalResponse> create(@RequestBody CreateProposalRequest request) {
+        Proposal proposal = request.convert();
+        proposalRepository.save(proposal);
+        return ResponseEntity.created(URI.create("/proposals")).body(new CreateProposalResponse(proposal));
+    }
+}

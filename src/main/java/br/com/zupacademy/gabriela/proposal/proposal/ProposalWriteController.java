@@ -1,5 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
+import br.com.zupacademy.gabriela.proposal.shared.exception.FieldErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class ProposalWriteController {
         String document = proposal.getDocument();
         final List<Proposal> proposalsWithThisDocument = proposalRepository.findByDocument(document);
         if(proposalsWithThisDocument.size() != 0){
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+            throw new FieldErrorException("This document already exists", HttpStatus.UNPROCESSABLE_ENTITY, "document");
         }
 
         proposalRepository.save(proposal);

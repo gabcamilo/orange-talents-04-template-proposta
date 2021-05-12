@@ -9,6 +9,9 @@ import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+@Table(
+        uniqueConstraints = @UniqueConstraint(name="proposal_document_unique", columnNames = "document")
+)
 @Entity
 public class Proposal {
     @Id

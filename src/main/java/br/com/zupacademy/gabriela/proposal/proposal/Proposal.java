@@ -1,16 +1,16 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
+import br.com.zupacademy.gabriela.proposal.services.RestrictionAnalysisService.RestrictionAnalysisService;
+import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
+
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Table(
-        uniqueConstraints = @UniqueConstraint(name="proposal_document_unique", columnNames = "document")
+        uniqueConstraints = @UniqueConstraint(name = "proposal_document_unique", columnNames = "document")
 )
 @Entity
 public class Proposal {
@@ -36,9 +36,11 @@ public class Proposal {
     @Column(nullable = false)
     private String address;
 
-
     @Column(nullable = false)
     private BigDecimal salary;
+
+    @Column(nullable = false)
+    private ProposalStatusEnum status;
 
     public Proposal(String document, String email, String name, String address, BigDecimal salary) {
         this.document = document;
@@ -46,12 +48,11 @@ public class Proposal {
         this.name = name;
         this.address = address;
         this.salary = salary;
+        this.status = ProposalStatusEnum.NAO_ANALISADO;
     }
 
     @Deprecated
-    public Proposal() {
-
-    }
+    public Proposal() { }
 
     public Long getId() {
         return id;
@@ -75,5 +76,19 @@ public class Proposal {
 
     public BigDecimal getSalary() {
         return salary;
+    }
+
+    public ProposalStatusEnum getStatus() {
+        return status;
+    }
+
+    // Async request to external API
+    public void setProposalStatusAsync(ProposalRepository proposalRepository, RestrictionAnalysisService restrictionAnalysisService) {
+        Thread restrictionAnalysisServiceThread = new Thread(() -> {
+            status = restrictionAnalysisService.getRestrictionAnalysis(this);
+            proposalRepository.save(this);
+        });
+
+        restrictionAnalysisServiceThread.start();
     }
 }

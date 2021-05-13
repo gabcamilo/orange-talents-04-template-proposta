@@ -1,18 +1,17 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
+
 import java.math.BigDecimal;
 
 public class CreateProposalResponse {
-    private Long id;
-    private String document;
-    private String email;
-    private String name;
-    private String address;
-    private BigDecimal salary;
+    private final Long id;
+    private final String document;
+    private final String email;
+    private final String name;
+    private final String address;
+    private final BigDecimal salary;
+    private final ProposalStatusEnum status;
     public CreateProposalResponse(Proposal proposal) {
         this.id = proposal.getId();
         this.document = proposal.getDocument();
@@ -20,6 +19,7 @@ public class CreateProposalResponse {
         this.name = proposal.getName();
         this.address = proposal.getAddress();
         this.salary = proposal.getSalary();
+        this.status = proposal.getStatus();
     }
 
     public Long getId() {
@@ -44,5 +44,9 @@ public class CreateProposalResponse {
 
     public BigDecimal getSalary() {
         return salary;
+    }
+
+    public ProposalStatusEnum getStatus() {
+        return status;
     }
 }

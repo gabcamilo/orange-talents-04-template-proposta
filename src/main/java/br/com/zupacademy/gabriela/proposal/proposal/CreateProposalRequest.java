@@ -1,5 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
+import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 import br.com.zupacademy.gabriela.proposal.shared.validation.CpfOrCnpj;
 
 import javax.validation.constraints.DecimalMin;
@@ -39,6 +40,18 @@ public class CreateProposalRequest {
         this.address = address;
         this.salary = salary;
         this.document = document;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Proposal convert() {

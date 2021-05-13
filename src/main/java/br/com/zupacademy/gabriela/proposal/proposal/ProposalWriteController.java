@@ -1,6 +1,9 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
+import br.com.zupacademy.gabriela.proposal.services.RestrictionAnalysisService.RestrictionAnalysisService;
+import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 import br.com.zupacademy.gabriela.proposal.shared.exception.FieldErrorException;
+import org.bouncycastle.asn1.isismtt.x509.Restriction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RequestMapping("/proposals")
 @RestController
 public class ProposalWriteController {
 
-    private ProposalRepository proposalRepository;
+    private final ProposalRepository proposalRepository;
+    private final RestrictionAnalysisService restrictionAnalysisService;
 
     @Autowired
-    public ProposalWriteController(ProposalRepository proposalRepository) {
+    public ProposalWriteController(ProposalRepository proposalRepository, RestrictionAnalysisService restrictionAnalysisService) {
         this.proposalRepository = proposalRepository;
+        this.restrictionAnalysisService = restrictionAnalysisService;
     }
 
     @PostMapping
@@ -35,6 +41,9 @@ public class ProposalWriteController {
         }
 
         proposalRepository.save(proposal);
+
+        proposal.setProposalStatusAsync(proposalRepository, restrictionAnalysisService);
+
         return ResponseEntity.created(URI.create("/proposals")).body(new CreateProposalResponse(proposal));
     }
 }

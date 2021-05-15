@@ -1,6 +1,5 @@
 package br.com.zupacademy.gabriela.proposal.services.RestrictionAnalysisService;
 
-import br.com.zupacademy.gabriela.proposal.proposal.CreateProposalRequest;
 import br.com.zupacademy.gabriela.proposal.proposal.Proposal;
 import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 import feign.FeignException;

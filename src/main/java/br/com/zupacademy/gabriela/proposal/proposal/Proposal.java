@@ -82,13 +82,12 @@ public class Proposal {
         return status;
     }
 
-    // Async request to external API
-    public void setProposalStatusAsync(ProposalRepository proposalRepository, RestrictionAnalysisService restrictionAnalysisService) {
-        Thread restrictionAnalysisServiceThread = new Thread(() -> {
-            status = restrictionAnalysisService.getRestrictionAnalysis(this);
-            proposalRepository.save(this);
-        });
 
-        restrictionAnalysisServiceThread.start();
+    public void saveProposalRestrictionStatusFromExternalService(
+            ProposalRepository proposalRepository,
+            RestrictionAnalysisService restrictionAnalysisService
+    ) {
+        status = restrictionAnalysisService.getRestrictionAnalysis(this);
+        proposalRepository.save(this);
     }
 }

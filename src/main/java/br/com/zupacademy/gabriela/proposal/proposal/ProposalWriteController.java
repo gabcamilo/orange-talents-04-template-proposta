@@ -42,7 +42,8 @@ public class ProposalWriteController {
 
         proposalRepository.save(proposal);
 
-        proposal.setProposalStatusAsync(proposalRepository, restrictionAnalysisService);
+        proposal.saveProposalRestrictionStatusFromExternalService(proposalRepository, restrictionAnalysisService);
+        // TODO: Rollback proposal save when there is a error on status save
 
         return ResponseEntity.created(URI.create("/proposals")).body(new CreateProposalResponse(proposal));
     }

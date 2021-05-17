@@ -1,5 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
+import br.com.zupacademy.gabriela.proposal.CreditCard.CreditCard;
 import br.com.zupacademy.gabriela.proposal.services.RestrictionAnalysisService.RestrictionAnalysisService;
 import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 
@@ -42,6 +43,14 @@ public class Proposal {
     @Column(nullable = false)
     private ProposalStatusEnum status;
 
+    @OneToOne(
+            mappedBy = "proposal",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+    )
+
+    CreditCard creditCard;
+
     public Proposal(String document, String email, String name, String address, BigDecimal salary) {
         this.document = document;
         this.email = email;
@@ -82,7 +91,6 @@ public class Proposal {
         return status;
     }
 
-
     public void saveProposalRestrictionStatusFromExternalService(
             ProposalRepository proposalRepository,
             RestrictionAnalysisService restrictionAnalysisService
@@ -90,4 +98,5 @@ public class Proposal {
         status = restrictionAnalysisService.getRestrictionAnalysis(this);
         proposalRepository.save(this);
     }
+
 }

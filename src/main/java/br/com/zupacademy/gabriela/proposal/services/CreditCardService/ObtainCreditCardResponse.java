@@ -1,6 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.services.CreditCardService;
 
-import br.com.zupacademy.gabriela.proposal.CreditCard.CreditCard;
+import br.com.zupacademy.gabriela.proposal.creditCard.CreditCard;
 import br.com.zupacademy.gabriela.proposal.proposal.Proposal;
 
 import java.time.LocalDateTime;

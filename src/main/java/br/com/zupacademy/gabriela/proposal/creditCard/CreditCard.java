@@ -1,12 +1,10 @@
-package br.com.zupacademy.gabriela.proposal.CreditCard;
+package br.com.zupacademy.gabriela.proposal.creditCard;
 
 import br.com.zupacademy.gabriela.proposal.proposal.Proposal;
 
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
-
-import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 public class CreditCard {
@@ -34,4 +32,11 @@ public class CreditCard {
 
     private LocalDateTime createdAt;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
 }

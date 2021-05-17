@@ -1,6 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
-import br.com.zupacademy.gabriela.proposal.CreditCard.CreditCard;
+import br.com.zupacademy.gabriela.proposal.creditCard.CreditCard;
 import br.com.zupacademy.gabriela.proposal.services.RestrictionAnalysisService.RestrictionAnalysisService;
 import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 
@@ -49,7 +49,7 @@ public class Proposal {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
     )
 
-    CreditCard creditCard;
+    private CreditCard creditCard;
 
     public Proposal(String document, String email, String name, String address, BigDecimal salary) {
         this.document = document;
@@ -91,6 +91,10 @@ public class Proposal {
         return status;
     }
 
+    public String getCreditCardNumber() {
+        return creditCard.getNumber();
+    }
+
     public void saveProposalRestrictionStatusFromExternalService(
             ProposalRepository proposalRepository,
             RestrictionAnalysisService restrictionAnalysisService
@@ -98,5 +102,4 @@ public class Proposal {
         status = restrictionAnalysisService.getRestrictionAnalysis(this);
         proposalRepository.save(this);
     }
-
 }

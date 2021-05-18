@@ -68,12 +68,19 @@
 	</dependencies>
 
 	<build>
+		<finalName>proposal</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.3.10.RELEASE</version>
+				<configuration>
+					<mainClass>br.com.zupacademy.gabriela.proposal.ProposalApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+
 
 </project>

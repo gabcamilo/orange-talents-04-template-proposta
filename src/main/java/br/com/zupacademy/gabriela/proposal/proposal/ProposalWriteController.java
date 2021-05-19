@@ -37,7 +37,7 @@ public class ProposalWriteController {
         String document = proposal.getDocument();
         final List<Proposal> proposalsWithThisDocument = proposalRepository.findByDocument(document);
         if(proposalsWithThisDocument.size() != 0){
-            throw new FieldErrorException("This document already exists", HttpStatus.UNPROCESSABLE_ENTITY, "document");
+            throw new FieldErrorException("document", "This document already exists", HttpStatus.UNPROCESSABLE_ENTITY );
         }
 
         proposalRepository.save(proposal);

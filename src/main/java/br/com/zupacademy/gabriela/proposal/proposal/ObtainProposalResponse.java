@@ -7,14 +7,15 @@ import java.math.BigDecimal;
 
 public class ObtainProposalResponse {
 
-    private Long id;
-    private String document;
-    private String email;
-    private String name;
-    private String address;
-    private BigDecimal salary;
-    private ProposalStatusEnum status;
-    private String creditCardNumber;
+    private final Long id;
+    private final String document;
+    private final String email;
+    private final String name;
+    private final String address;
+    private final BigDecimal salary;
+    private final ProposalStatusEnum status;
+    private final Long creditCardId;
+    private final String creditCardNumber;
 
     public ObtainProposalResponse(Proposal proposal) {
         this.id = proposal.getId();
@@ -24,9 +25,8 @@ public class ObtainProposalResponse {
         this.address = proposal.getAddress();
         this.salary = proposal.getSalary();
         this.status = proposal.getStatus();
+        this.creditCardId = proposal.getCreditCardId();
         this.creditCardNumber = proposal.getCreditCardNumber();
-
-
     }
 
     public Long getId() {
@@ -57,7 +57,10 @@ public class ObtainProposalResponse {
         return status;
     }
 
+    public Long getCreditCardId() { return creditCardId; }
+
     public String getCreditCardNumber() {
         return creditCardNumber;
     }
+
 }

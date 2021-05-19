@@ -7,7 +7,7 @@ public class FieldErrorException extends RuntimeException{
     private final String message;
     private final String fieldName;
 
-    public FieldErrorException(String message, HttpStatus httpStatus, String fieldName) {
+    public FieldErrorException(String fieldName, String message, HttpStatus httpStatus) {
         super(message);
         this.httpStatus = httpStatus;
         this.message = message;

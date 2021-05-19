@@ -92,7 +92,18 @@ public class Proposal {
     }
 
     public String getCreditCardNumber() {
+        if(creditCard == null){
+            return "";
+        }
         return creditCard.getNumber();
+    }
+
+    public Long getCreditCardId() {
+
+        if(creditCard == null){
+            return null;
+        }
+        return creditCard.getId();
     }
 
     public void saveProposalRestrictionStatusFromExternalService(
@@ -102,4 +113,5 @@ public class Proposal {
         status = restrictionAnalysisService.getRestrictionAnalysis(this);
         proposalRepository.save(this);
     }
+
 }

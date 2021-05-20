@@ -26,7 +26,7 @@ public class ObtainProposalResponse {
         this.salary = proposal.getSalary();
         this.status = proposal.getStatus();
         this.creditCardId = proposal.getCreditCardId();
-        this.creditCardNumber = proposal.getCreditCardNumber();
+        this.creditCardNumber = proposal.getCreditCardNumberObfuscated();
     }
 
     public Long getId() {

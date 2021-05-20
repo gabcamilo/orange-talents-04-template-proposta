@@ -91,11 +91,12 @@ public class Proposal {
         return status;
     }
 
-    public String getCreditCardNumber() {
+    public String getCreditCardNumberObfuscated() {
         if(creditCard == null){
             return "";
         }
-        return creditCard.getNumber();
+        String lastFourDigits = creditCard.getNumber().substring(14);
+        return "****-****-****" + lastFourDigits;
     }
 
     public Long getCreditCardId() {

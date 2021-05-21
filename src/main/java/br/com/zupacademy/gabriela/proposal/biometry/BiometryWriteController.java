@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
-@RequestMapping("/credit-cards/{creditCardId}/biometrics")
+@RequestMapping("/api/credit-cards/{creditCardId}/biometrics")
 @RestController
 public class BiometryWriteController {
 

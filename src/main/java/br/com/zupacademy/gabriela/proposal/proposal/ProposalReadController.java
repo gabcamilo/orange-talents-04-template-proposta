@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-@RequestMapping("/proposals")
+@RequestMapping("/api/proposals")
 @RestController
 public class ProposalReadController {
 

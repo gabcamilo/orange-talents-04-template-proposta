@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@RequestMapping("/proposals")
+@RequestMapping("/api/proposals")
 @RestController
 public class ProposalWriteController {
 

@@ -1,9 +1,7 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
 import br.com.zupacademy.gabriela.proposal.services.RestrictionAnalysisService.RestrictionAnalysisService;
-import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 import br.com.zupacademy.gabriela.proposal.shared.exception.FieldErrorException;
-import org.bouncycastle.asn1.isismtt.x509.Restriction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @RequestMapping("/api/proposals")
 @RestController
@@ -45,6 +42,6 @@ public class ProposalWriteController {
         proposal.saveProposalRestrictionStatusFromExternalService(proposalRepository, restrictionAnalysisService);
         // TODO: Rollback proposal save when there is a error on status save
 
-        return ResponseEntity.created(URI.create("/proposals")).body(new CreateProposalResponse(proposal));
+        return ResponseEntity.created(URI.create("/api/proposals")).body(new CreateProposalResponse(proposal));
     }
 }

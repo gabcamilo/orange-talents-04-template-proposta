@@ -31,12 +31,12 @@ public class BiometryWriteController {
         Optional<CreditCard> creditCard = creditCardRepository.findById(creditCardId);
 
         if(creditCard.isEmpty()){
-            throw new NotFoundException("/credit-cards/"+creditCardId+"/biometrics");
+            throw new NotFoundException("/api/credit-cards/"+creditCardId+"/biometrics");
         }
 
         Biometry biometry = request.convert(creditCard.get());
         biometryRepository.save(biometry);
-        URI uri = uriBuilder.path("credit-cards/{creditCardId}/biometrics/{id}").buildAndExpand(creditCardId, biometry.getId()).toUri();
+        URI uri = uriBuilder.path("/api/credit-cards/{creditCardId}/biometrics/{id}").buildAndExpand(creditCardId, biometry.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }

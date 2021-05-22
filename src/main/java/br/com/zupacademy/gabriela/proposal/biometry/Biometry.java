@@ -22,6 +22,7 @@ public class Biometry {
     private byte[] fingerprint;
 
     @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "credit_card_biometry_fk"))
     private CreditCard creditCard;
 
     @Deprecated

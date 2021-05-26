@@ -10,6 +10,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -55,6 +56,12 @@ public class ApiExceptionHandlerAdvice {
         return ResponseEntity.notFound().build();
     }
 
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<HttpErrorResponse> handle(HttpClientErrorException exception) {
+        HttpErrorResponse response = new HttpErrorResponse(exception.getStatusCode().value(), exception.getMessage());
+
+        return ResponseEntity.status(exception.getStatusCode()).body(response);
+    }
 
     private String getErrorMessage(ObjectError error) {
         return messageSource.getMessage(error, LocaleContextHolder.getLocale());

@@ -1,7 +1,8 @@
-package br.com.zupacademy.gabriela.proposal.creditCardBlock;
+package br.com.zupacademy.gabriela.proposal.creditCard;
 
 import br.com.zupacademy.gabriela.proposal.creditCard.CreditCard;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -22,12 +23,25 @@ public class CreditCardBlock {
 
     public CreditCardBlock(CreditCard creditCard, String clientIpAddress, String clientUserAgent) {
         this.id = creditCard.getId();
-        this.creditCard = creditCard;
         this.clientIpAddress = clientIpAddress;
         this.clientUserAgent = clientUserAgent;
         this.blockedAt = LocalDateTime.now();
+        this.creditCard = creditCard;
     }
 
     @Deprecated
     protected CreditCardBlock() { }
+
+    public LocalDateTime getBlockedAt() {
+        return blockedAt;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    @PostPersist
+    private void setBlockToCreditCard() {
+        creditCard.block(this);
+    }
 }

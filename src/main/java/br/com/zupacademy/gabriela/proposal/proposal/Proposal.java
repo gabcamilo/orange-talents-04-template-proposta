@@ -95,8 +95,7 @@ public class Proposal {
         if(creditCard == null){
             return "";
         }
-        String lastFourDigits = creditCard.getNumber().substring(14);
-        return "****-****-****" + lastFourDigits;
+        return creditCard.getNumberOfuscated();
     }
 
     public Long getCreditCardId() {

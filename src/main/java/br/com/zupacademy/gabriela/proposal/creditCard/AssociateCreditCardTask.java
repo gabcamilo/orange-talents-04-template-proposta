@@ -2,7 +2,6 @@ package br.com.zupacademy.gabriela.proposal.creditCard;
 
 import br.com.zupacademy.gabriela.proposal.proposal.Proposal;
 import br.com.zupacademy.gabriela.proposal.proposal.ProposalRepository;
-import br.com.zupacademy.gabriela.proposal.services.CreditCardService.CreditCardService;
 import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

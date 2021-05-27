@@ -1,7 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.creditCard.travelAlert;
 
 import br.com.zupacademy.gabriela.proposal.creditCard.CreditCard;
-import br.com.zupacademy.gabriela.proposal.creditCard.CreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/api/credit-cards/{creditCardId}/travel-alert")
 public class CreditCardTravelAlertController {
 
-    private final CreditCardTravelAlertService creditTravelAlertCardService;
+    private final CreditCardTravelAlertService creditCardTravelAlertService;
 
     @Autowired
     public CreditCardTravelAlertController(CreditCardTravelAlertService creditTravelAlertCardService) {
-        this.creditTravelAlertCardService = creditTravelAlertCardService;
+        this.creditCardTravelAlertService = creditTravelAlertCardService;
     }
 
     @PostMapping
@@ -26,7 +25,7 @@ public class CreditCardTravelAlertController {
             HttpServletRequest httpServletRequest
     ) throws Exception {
 
-        CreditCard creditCard = creditTravelAlertCardService.createCreditCardTravelAlert(creditCardId, request, httpServletRequest);
+        CreditCard creditCard = creditCardTravelAlertService.createCreditCardTravelAlert(creditCardId, request, httpServletRequest);
         return ResponseEntity.ok(new CreditCardTravelAlertResponse(creditCard));
     }
 }

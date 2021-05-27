@@ -10,6 +10,9 @@ public interface CreditCardApiClient {
     ObtainCreditCardResponse obtainCreditCard(@RequestParam("idProposta") Long idProposal);
 
     @PostMapping("/{id}/bloqueios")
-    void blockCreditCard(@PathVariable("id") String id, BlockRequestBody request);
+    void blockCreditCard(@PathVariable("id") String id, CreditCardBlockExternalApiRequest request);
+
+    @PostMapping("/{id}/avisos")
+    void createCreditCardTravelAlert(@PathVariable("id") String id, CreditCardTravelAlertExternalApiRequest request);
 
 }

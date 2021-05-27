@@ -1,9 +1,9 @@
 package br.com.zupacademy.gabriela.proposal.services.CreditCardService;
 
-public class BlockRequestBody {
+public class CreditCardBlockExternalApiRequest {
     private final String sistemaResponsavel;
 
-    public BlockRequestBody() {
+    public CreditCardBlockExternalApiRequest() {
         this.sistemaResponsavel = "proposta";
     }
 

@@ -2,7 +2,7 @@ package br.com.zupacademy.gabriela.proposal.creditCard.block;
 
 import br.com.zupacademy.gabriela.proposal.creditCard.CreditCard;
 import br.com.zupacademy.gabriela.proposal.creditCard.CreditCardService;
-import br.com.zupacademy.gabriela.proposal.services.CreditCardService.BlockRequestBody;
+import br.com.zupacademy.gabriela.proposal.services.CreditCardService.CreditCardBlockExternalApiRequest;
 import br.com.zupacademy.gabriela.proposal.services.CreditCardService.CreditCardApiClient;
 import br.com.zupacademy.gabriela.proposal.shared.enums.CreditCardStatusEnum;
 import feign.FeignException;
@@ -27,7 +27,10 @@ public class CreditCardBlockService {
         this.creditCardApiClient = creditCardApiClient;
     }
 
-    public CreditCard blockCreditCard(Long creditCardId, HttpServletRequest httpServletRequest) throws Exception {
+    public CreditCard blockCreditCard(
+            Long creditCardId,
+            HttpServletRequest httpServletRequest
+    ) throws Exception {
 
         CreditCard creditCard = creditCardService.obtainCreditCard(creditCardId);
         testCreditCardIsAlreadyBlocked(creditCard);
@@ -49,7 +52,7 @@ public class CreditCardBlockService {
         //TODO: make "proposta" a constant
         creditCardApiClient.blockCreditCard(
                 creditCard.getNumber(),
-                new BlockRequestBody()
+                new CreditCardBlockExternalApiRequest()
         );
     }
 

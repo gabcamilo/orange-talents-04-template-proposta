@@ -1,4 +1,4 @@
-package br.com.zupacademy.gabriela.proposal.creditCard.responses;
+package br.com.zupacademy.gabriela.proposal.creditCard.block;
 
 import br.com.zupacademy.gabriela.proposal.creditCard.CreditCard;
 
@@ -11,7 +11,7 @@ public class CreditCardBlockResponse {
 
     public CreditCardBlockResponse(CreditCard creditCard) {
             id = creditCard.getId();
-            number = creditCard.getNumberOfuscated();
+            number = creditCard.getNumberObfuscated();
             blockedAt = creditCard.getBlockDate();
     }
 

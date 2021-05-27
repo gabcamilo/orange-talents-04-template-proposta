@@ -1,4 +1,4 @@
-package br.com.zupacademy.gabriela.proposal.creditCard.responses;
+package br.com.zupacademy.gabriela.proposal.creditCard;
 
 import br.com.zupacademy.gabriela.proposal.creditCard.CreditCard;
 import br.com.zupacademy.gabriela.proposal.proposal.Proposal;

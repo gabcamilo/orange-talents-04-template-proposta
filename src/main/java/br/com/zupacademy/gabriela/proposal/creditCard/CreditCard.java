@@ -1,10 +1,13 @@
 package br.com.zupacademy.gabriela.proposal.creditCard;
 
+import br.com.zupacademy.gabriela.proposal.creditCard.block.CreditCardBlock;
+import br.com.zupacademy.gabriela.proposal.creditCard.travelAlert.CreditCardTravelAlert;
 import br.com.zupacademy.gabriela.proposal.proposal.Proposal;
 import br.com.zupacademy.gabriela.proposal.shared.enums.CreditCardStatusEnum;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -31,7 +34,15 @@ public class CreditCard {
             orphanRemoval = true,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
     )
+    //TODO: improve this with Optional (?)
     private CreditCardBlock block;
+
+    @OneToOne(
+            mappedBy = "creditCard",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+    )
+    private CreditCardTravelAlert travelAlert;
 
     public CreditCard(Proposal proposal, String number, LocalDateTime createdAt) {
         this.id = proposal.getId();
@@ -61,23 +72,42 @@ public class CreditCard {
         return status;
     }
 
+    public LocalDate getTravelEndDate() {
+        //TODO: improve this with Optional (?)
+        if(travelAlert != null){
+            return travelAlert.getTravelEndDate();
+        }
+        return null;
+    }
+
+    public String getTravelDestination() {
+        //TODO: improve this with Optional (?)
+        if(travelAlert != null){
+            return travelAlert.getDestination();
+        }
+        return null;
+    }
+
     public void block(CreditCardBlock block){
         this.block = block;
         loadStatus();
     }
 
-   /*
-    * No modifier so the response can't access from "responses" package
-    * to access the credit card number from a response level use the following getNumberObfuscated method
-    */
-    String getNumber() {
+    public void createTravelAlert(CreditCardTravelAlert creditCardTravelAlert) {
+        this.travelAlert = creditCardTravelAlert;
+    }
+
+
+    // Do not use this method in responses. Use the following getNumberObfuscated method instead
+    public String getNumber() {
         return number;
     }
 
-    public String getNumberOfuscated() {
+    public String getNumberObfuscated() {
         String lastFourDigits = number.substring(14);
         return "****-****-****" + lastFourDigits;
     }
+
     @PostUpdate
     @PostLoad
     public void loadStatus(){

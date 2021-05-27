@@ -1,6 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.services.CreditCardService;
 
-import br.com.zupacademy.gabriela.proposal.creditCard.responses.ObtainCreditCardResponse;
+import br.com.zupacademy.gabriela.proposal.creditCard.ObtainCreditCardResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

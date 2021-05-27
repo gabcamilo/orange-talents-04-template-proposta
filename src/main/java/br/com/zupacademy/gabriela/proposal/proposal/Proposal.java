@@ -95,7 +95,7 @@ public class Proposal {
         if(creditCard == null){
             return "";
         }
-        return creditCard.getNumberOfuscated();
+        return creditCard.getNumberObfuscated();
     }
 
     public Long getCreditCardId() {

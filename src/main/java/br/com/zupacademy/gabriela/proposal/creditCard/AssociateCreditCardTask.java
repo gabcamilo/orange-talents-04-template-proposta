@@ -31,7 +31,7 @@ public class AssociateCreditCardTask {
         List<Proposal> eligibleProposals = proposalRepository.findByStatusAndCreditCardNull(ProposalStatusEnum.ELEGIVEL);
         eligibleProposals.forEach(
                 proposal -> {
-                    CreditCard creditCard = creditCardService.obtainCreditCard(proposal);
+                    CreditCard creditCard = creditCardService.obtainCreditCardFromExternalService(proposal);
                     creditCardRepository.save(creditCard);
                 }
         );

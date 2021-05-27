@@ -1,12 +1,8 @@
 package br.com.zupacademy.gabriela.proposal.proposal;
 
-import br.com.zupacademy.gabriela.proposal.shared.enums.ProposalStatusEnum;
 import br.com.zupacademy.gabriela.proposal.shared.validation.CpfOrCnpj;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class CreateProposalRequest {

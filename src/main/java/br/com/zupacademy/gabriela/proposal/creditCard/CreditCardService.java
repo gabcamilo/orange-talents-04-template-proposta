@@ -40,8 +40,4 @@ public class CreditCardService {
         }
         return creditCardOptional.get();
     }
-
-    public String obtainFullNumber(CreditCard creditCard){
-        return creditCard.getNumber();
-    }
 }

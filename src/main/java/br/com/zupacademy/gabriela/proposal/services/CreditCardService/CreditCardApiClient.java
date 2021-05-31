@@ -15,4 +15,6 @@ public interface CreditCardApiClient {
     @PostMapping("/{id}/avisos")
     void createCreditCardTravelAlert(@PathVariable("id") String id, CreditCardTravelAlertExternalApiRequest request);
 
+    @PostMapping("/{id}/carteiras")
+    void associateWallet(@PathVariable("id") String id, AssociateWalletExternalApiRequest request);
 }

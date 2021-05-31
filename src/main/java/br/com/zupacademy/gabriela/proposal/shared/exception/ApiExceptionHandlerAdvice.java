@@ -1,5 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.shared.exception;
 
+import feign.FeignException;
 import javassist.NotFoundException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -11,11 +12,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class ApiExceptionHandlerAdvice {
@@ -61,6 +60,22 @@ public class ApiExceptionHandlerAdvice {
         HttpErrorResponse response = new HttpErrorResponse(exception.getStatusCode().value(), exception.getMessage());
 
         return ResponseEntity.status(exception.getStatusCode()).body(response);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<?> handle(MethodArgumentTypeMismatchException exception) {
+
+        if(exception.getName().equals("walletEnum")){
+            return handle(new FieldErrorException("wallet", exception.getValue() + " wallet does not exist", HttpStatus.BAD_REQUEST));
+        }
+
+        // Defensive programming, but it must never get to this generic message return bellow
+        return handle(new FieldErrorException(exception.getName(), exception.getValue() + " is not a valid argument", HttpStatus.BAD_REQUEST));
+    }
+
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<?> handle(FeignException exception) {
+        return ResponseEntity.unprocessableEntity().build();
     }
 
     private String getErrorMessage(ObjectError error) {

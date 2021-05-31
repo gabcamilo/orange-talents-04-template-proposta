@@ -1,5 +1,6 @@
 package br.com.zupacademy.gabriela.proposal.creditCard.wallet;
 
 public enum Wallets {
-    PAYPAL
+    PAYPAL,
+    SAMSUNG_PAY
 }
